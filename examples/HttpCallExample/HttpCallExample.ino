@@ -1,11 +1,11 @@
 #include <Arduino.h>
-#include <Wifi.h>
+#include <WiFi.h>
 
 #include "httpcall.hpp"
-#include "nlohmann/json.hpp"
+#include "ArduinoJson.h"
 
-#define SSID "your ssid here"
-#define PASS "your password here"
+#define SSID "nikachu-2.4G"
+#define PASS "nikachu-2012"
 
 HttpCall httpcall;
 
@@ -18,7 +18,7 @@ void setup()
     httpcall.begin();
 
     // add function
-    httpcall.add("test", "test", [](nlohmann::json j) {
+    httpcall.add("test", "test", [](JsonObject j) {
         Serial.println("http called!");
     });
 }
