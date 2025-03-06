@@ -24,11 +24,11 @@ void HttpCall::run()
         _server.send(405, "text/plain", "405 Method Not Allowed");
         return;
     }
-    nlohmann::json body;
+    StaticJsonDocument<HTTPCALL_BUFSIZ> body;
 
     try
     {
-        body = nlohmann::json::parse(_server.arg("plain").c_str());
+        deserializeJson(body, _server.arg("plain"));
     }
     catch (const std::exception &e)
     {
@@ -38,9 +38,9 @@ void HttpCall::run()
 
     try
     {
-        auto id = body["id"].get<std::string>();
-        auto function = body["function"].get<std::string>();
-        auto key = id + "_" + function;
+        String id = body["id"];
+        String function = body["function"];
+        String key = id + "_" + function;
 
         if (!_funcList.count(key))
         {
@@ -48,7 +48,9 @@ void HttpCall::run()
             return;
         }
 
-        auto val = body.contains("value") ? body["value"] : nlohmann::json::object();
+        JsonObject obj;
+
+        auto val = body.containsKey("value") ? body["value"] : obj;
 
         _funcList[key](val);
 
@@ -68,7 +70,7 @@ void HttpCall::preflight()
     _server.send(204);
 }
 
-void HttpCall::add(std::string id, std::string function, const std::function<void(nlohmann::json)> &callback)
+void HttpCall::add(String id, String function, const std::function<void(JsonObject)> &callback)
 {
     auto key = id + "_" + function;
     _funcList.emplace(key, callback);
@@ -97,7 +99,7 @@ void HttpCall::beginServer()
                { run(); });
     _server.on("/run", HTTP_OPTIONS, [this]()
                { preflight(); });
-               
+
     _server.begin();
 }
 

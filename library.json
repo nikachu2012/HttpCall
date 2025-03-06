@@ -16,7 +16,7 @@
     ],
     "license": "MIT",
     "dependencies": {
-        "nlohmann-json": "~3.11.3"
+        "ArduinoJson": "~7.3.1"
     },
     "frameworks": "*",
     "platforms": "*"

@@ -1,8 +1,11 @@
 #pragma once
 
+#define HTTPCALL_BUFSIZ 512
+#include <Arduino.h>
+#include <WiFi.h>
 #include <map>
 #include <functional>
-#include <nlohmann/json.hpp>
+#include <ArduinoJson.h>
 #include <WebServer.h>
 
 class HttpCall
@@ -12,7 +15,7 @@ private:
      * @brief 関数テーブル
      * idと関数のマップを定義します
      */
-    std::map<std::string, const std::function<void(nlohmann::json)>> _funcList;
+    std::map<String, const std::function<void(JsonObject)>> _funcList;
     /**
      * @brief サーバクラス
      */
@@ -36,7 +39,7 @@ private:
 public:
     /**
      * @brief Construct a new Http Call object
-     * 
+     *
      * @param port 開くポート番号 default=80
      */
     HttpCall(const int port = 80);
@@ -55,12 +58,12 @@ public:
 
     /**
      * @brief 処理される関数の登録
-     * 
-     * @param id 
-     * @param function 
-     * @param callback 
+     *
+     * @param id
+     * @param function
+     * @param callback
      */
-    void add(std::string id, std::string function, const std::function<void(nlohmann::json)> &callback);
+    void add(String id, String function, const std::function<void(JsonObject)> &callback);
 
     /**
      * @brief Destroy the Http Call object
