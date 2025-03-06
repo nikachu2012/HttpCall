@@ -1,0 +1,23 @@
+{
+    "name": "HttpCall",
+    "version": "1.0.0",
+    "description": "HttpCall executes functions in response to HTTP requests.",
+    "keywords": "wifi, runner, call",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nikachu2012/HttpCall.git"
+    },
+    "authors": [
+        {
+            "name": "nikachu2012",
+            "email": "webmaster@nikachu.net",
+            "url": "https://github.com/nikachu2012"
+        }
+    ],
+    "license": "MIT",
+    "dependencies": {
+        "nlohmann-json": "~3.11.3"
+    },
+    "frameworks": "*",
+    "platforms": "*"
+}
