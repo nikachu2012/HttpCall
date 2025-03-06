@@ -1,6 +1,6 @@
 {
     "name": "HttpCall",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "HttpCall executes functions in response to HTTP requests.",
     "keywords": "wifi, runner, call",
     "repository": {
