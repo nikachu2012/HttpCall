@@ -6,7 +6,7 @@ Please see `examples/HttpCallExample/HttpCallExample.ino`.
 
 1. include and construct
     ```cpp
-    #include <HttpCall.hpp>
+    #include <httpcall.hpp>
     #include <WiFi.h>
     #include <ArduinoJson.h>
 
